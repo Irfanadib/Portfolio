@@ -214,6 +214,21 @@
             line-height: 1.6;
         }
 
+        .card .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .card .tag {
+            padding: 0.4rem 1rem;
+            background: rgba(100, 181, 246, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #64b5f6;
+        }
+
         /* Skills Section */
         .skills-container {
             display: grid;
@@ -255,69 +270,6 @@
             background: rgba(100, 181, 246, 0.25);
             border-color: rgba(100, 181, 246, 0.5);
             transform: translateY(-2px);
-        }
-
-        /* Projects Section */
-        .project-card {
-            background: rgba(30, 30, 50, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 0;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(100, 181, 246, 0.2);
-            transition: transform 0.3s;
-            overflow: hidden;
-        }
-
-        .project-card:hover {
-            transform: scale(1.02);
-            border-color: rgba(100, 181, 246, 0.5);
-        }
-
-        .project-image {
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .project-image svg {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding: 1.5rem 2rem 0 2rem;
-        }
-
-        .project-header h3 {
-            color: #64b5f6;
-            font-size: 1.5rem;
-        }
-
-        .project-card p {
-            padding: 0 2rem;
-            color: #b0b0b0;
-            line-height: 1.6;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-            padding: 1rem 2rem 2rem 2rem;
-        }
-
-        .tag {
-            padding: 0.4rem 1rem;
-            background: rgba(100, 181, 246, 0.2);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #64b5f6;
         }
 
         /* Contact Section */
@@ -453,7 +405,7 @@
     <section id="home">
         <div class="container">
             <div class="hero-content">
-                <h1>Irfan Adib bin Sahak</h1>
+                <h1>Irfan Adib Sahak</h1>
                 <p>Final Year Computer Science Student</p>
                 <a href="#contact" class="cta-button">Get In Touch</a>
             </div>
@@ -478,54 +430,52 @@
     <section id="projects">
         <div class="container">
             <h2>Projects</h2>
-            
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="images/Project 1.jpg" alt="Final Year Project" style="display:block; width:100%; height:auto;" />
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">
+                        <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#1a1a2e"/>
+                            <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Project Image</text>
+                        </svg>
+                    </div>
+                    <h3>💻 Project Title 1</h3>
+                    <p>A brief description of your project, what problems it solves, and the technologies you used to build it. Explain the impact and what you learned from this experience.</p>
+                    <div class="project-tags">
+                        <span class="tag">Technology 1</span>
+                        <span class="tag">Technology 2</span>
+                        <span class="tag">Technology 3</span>
+                    </div>
                 </div>
-                <div class="project-header">
-                    <h3>Final Year Project - LeptoSafe</h3>
-                </div>
-                <p>LeptoSafe, a Flutter-based mobile application focusing on the individual management of the zoonotic disease, leptospirosis. Features include hotspot and health facilities tracking as well as self-assessment questionnaire among others. The technology stack includes Flutter, Firebase, Google Maps API and Android Studio.</p>
-                <div class="project-tags">
-                    <span class="tag">Flutter</span>
-                    <span class="tag">Firebase</span>
-                    <span class="tag">Google Maps API</span>
-                </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-image">
-                    <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100%" height="100%" fill="#1a1a2e"/>
-                        <text x="50%" y="50%" font-family="Arial" font-size="24" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Project Image</text>
-                    </svg>
+                <div class="card">
+                    <div class="card-image">
+                        <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#1a1a2e"/>
+                            <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Project Image</text>
+                        </svg>
+                    </div>
+                    <h3>📱 Project Title 2</h3>
+                    <p>Another project showcasing your skills and creativity. Describe the challenges you faced and how you overcame them.</p>
+                    <div class="project-tags">
+                        <span class="tag">Technology 1</span>
+                        <span class="tag">Technology 2</span>
+                    </div>
                 </div>
-                <div class="project-header">
-                    <h3>Project Title 2</h3>
-                </div>
-                <p>Another project showcasing your skills and creativity. Describe the challenges you faced and how you overcame them.</p>
-                <div class="project-tags">
-                    <span class="tag">Technology 1</span>
-                    <span class="tag">Technology 2</span>
-                </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-image">
-                    <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100%" height="100%" fill="#1a1a2e"/>
-                        <text x="50%" y="50%" font-family="Arial" font-size="24" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Project Image</text>
-                    </svg>
-                </div>
-                <div class="project-header">
-                    <h3>Project Title 3</h3>
-                </div>
-                <p>A third project demonstrating your versatility and continuous learning in different areas.</p>
-                <div class="project-tags">
-                    <span class="tag">Technology 1</span>
-                    <span class="tag">Technology 2</span>
-                    <span class="tag">Technology 3</span>
+                <div class="card">
+                    <div class="card-image">
+                        <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#1a1a2e"/>
+                            <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Project Image</text>
+                        </svg>
+                    </div>
+                    <h3>🌐 Project Title 3</h3>
+                    <p>A third project demonstrating your versatility and continuous learning in different areas.</p>
+                    <div class="project-tags">
+                        <span class="tag">Technology 1</span>
+                        <span class="tag">Technology 2</span>
+                        <span class="tag">Technology 3</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -735,4 +685,4 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.card, .project-card, .skill-category').forEach(el => {
+        document.querySelectorAll('.card, .skill-category').forEach(el => {
