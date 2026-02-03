@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(100, 200, 255, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-50px) translateX(100px); }
+            75% { transform: translateY(-150px) translateX(-50px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #64b5f6;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #64b5f6, #42a5f5);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #64b5f6;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #64b5f6, transparent);
+        }
+
+        /* Hero Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #b0b0b0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #64b5f6, #42a5f5);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(100, 181, 246, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(100, 181, 246, 0.6);
+        }
+
+        /* Card styles */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: rgba(30, 30, 50, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 0.6s;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(100, 181, 246, 0.3);
+            border-color: rgba(100, 181, 246, 0.5);
+        }
+
+        .card-image {
+            margin: -2rem -2rem 1.5rem -2rem;
+            border-radius: 15px 15px 0 0;
+            overflow: hidden;
+        }
+
+        .card-image svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .card h3 {
+            color: #64b5f6;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(30, 30, 50, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(100, 181, 246, 0.2);
+        }
+
+        .skill-category h3 {
+            color: #64b5f6;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            padding: 0.6rem 1.2rem;
+            background: rgba(100, 181, 246, 0.15);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            border-radius: 25px;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: rgba(100, 181, 246, 0.25);
+            border-color: rgba(100, 181, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Projects Section */
+        .project-card {
+            background: rgba(30, 30, 50, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 0;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(100, 181, 246, 0.5);
+        }
+
+        .project-image {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .project-image svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1.5rem 2rem 0 2rem;
+        }
+
+        .project-header h3 {
+            color: #64b5f6;
+            font-size: 1.5rem;
+        }
+
+        .project-card p {
+            padding: 0 2rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            padding: 1rem 2rem 2rem 2rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: rgba(100, 181, 246, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #64b5f6;
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #64b5f6, #42a5f5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            section {
+                padding: 6rem 5% 3rem;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid #64b5f6;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            padding-top: 8px;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            width: 6px;
+            height: 10px;
+            background: #64b5f6;
+            border-radius: 3px;
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Your Name</h1>
+                <p>Student | Developer | Innovator</p>
+                <a href="#contact" class="cta-button">Get In Touch</a>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="card">
+                <p>Welcome to my portfolio! I'm a passionate student with a keen interest in technology and innovation. This section can include your educational background, interests, and what drives you. Feel free to add your personal story and what makes you unique.</p>
+                <p style="margin-top: 1rem;">You can customize this section to reflect your personality and professional aspirations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" fill="#1a1a2e"/>
+                        <text x="50%" y="50%" font-family="Arial" font-size="24" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Project Image</text>
+                    </svg>
+                </div>
+                <div class="project-header">
+                    <h3>Project Title 1</h3>
+                </div>
+                <p>A brief description of your project, what problems it solves, and the technologies you used to build it. Explain the impact and what you learned from this experience.</p>
+                <div class="project-tags">
+                    <span class="tag">Technology 1</span>
+                    <span class="tag">Technology 2</span>
+                    <span class="tag">Technology 3</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" fill="#1a1a2e"/>
+                        <text x="50%" y="50%" font-family="Arial" font-size="24" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Project Image</text>
+                    </svg>
+                </div>
+                <div class="project-header">
+                    <h3>Project Title 2</h3>
+                </div>
+                <p>Another project showcasing your skills and creativity. Describe the challenges you faced and how you overcame them.</p>
+                <div class="project-tags">
+                    <span class="tag">Technology 1</span>
+                    <span class="tag">Technology 2</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" fill="#1a1a2e"/>
+                        <text x="50%" y="50%" font-family="Arial" font-size="24" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Project Image</text>
+                    </svg>
+                </div>
+                <div class="project-header">
+                    <h3>Project Title 3</h3>
+                </div>
+                <p>A third project demonstrating your versatility and continuous learning in different areas.</p>
+                <div class="project-tags">
+                    <span class="tag">Technology 1</span>
+                    <span class="tag">Technology 2</span>
+                    <span class="tag">Technology 3</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Co-curricular Activities Section -->
+    <section id="activities">
+        <div class="container">
+            <h2>Co-curricular Activities</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">
+                        <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#1a1a2e"/>
+                            <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Activity Image</text>
+                        </svg>
+                    </div>
+                    <h3>🎯 Activity 1</h3>
+                    <p>Leadership roles, club memberships, or extracurricular activities you've participated in.</p>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#1a1a2e"/>
+                            <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Activity Image</text>
+                        </svg>
+                    </div>
+                    <h3>🤝 Activity 2</h3>
+                    <p>Community service, volunteer work, or social initiatives you've been involved with.</p>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#1a1a2e"/>
+                            <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Activity Image</text>
+                        </svg>
+                    </div>
+                    <h3>🎨 Activity 3</h3>
+                    <p>Sports, arts, cultural activities, or other interests outside of academics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Achievements Section -->
+    <section id="achievements">
+        <div class="container">
+            <h2>Academic Achievements</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-image">
+                        <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#1a1a2e"/>
+                            <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Achievement Image</text>
+                        </svg>
+                    </div>
+                    <h3>🏆 Achievement Title 1</h3>
+                    <p>Description of your academic achievement. This could be awards, scholarships, honors, or notable academic accomplishments.</p>
+                    <p style="margin-top: 0.5rem; color: #64b5f6; font-size: 0.9rem;">Year: 2024</p>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#1a1a2e"/>
+                            <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Achievement Image</text>
+                        </svg>
+                    </div>
+                    <h3>🎓 Achievement Title 2</h3>
+                    <p>Another significant academic milestone or recognition you've received during your studies.</p>
+                    <p style="margin-top: 0.5rem; color: #64b5f6; font-size: 0.9rem;">Year: 2023</p>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <svg width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#1a1a2e"/>
+                            <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#64b5f6" text-anchor="middle" dominant-baseline="middle">Achievement Image</text>
+                        </svg>
+                    </div>
+                    <h3>📚 Achievement Title 3</h3>
+                    <p>Additional academic honors, Dean's list, GPA achievements, or other academic distinctions.</p>
+                    <p style="margin-top: 0.5rem; color: #64b5f6; font-size: 0.9rem;">Year: 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">TypeScript</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Web Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">Express</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">AWS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Other Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">Problem Solving</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p style="font-size: 1.2rem; color: #b0b0b0; margin-bottom: 2rem;">Feel free to reach out for collaborations or just a friendly chat!</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff86908a8dd19a929e9693bf9a879e928f939ad19c9092">[email&#160;protected]</a></p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <p>LinkedIn Profile</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🐙</div>
+                    <p>GitHub Profile</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Create animated background particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 5 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Initialize
+        createParticles();
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .project-card, .skill-category').forEach(el => {
