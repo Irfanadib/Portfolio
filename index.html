@@ -679,8 +679,12 @@
         }, observerOptions);
 
         document.querySelectorAll('.card, .skill-category').forEach(el => {
-    observer.observe(el);
-});
-</script>
+            el.style.opacity = '0'; 
+            el.style.transform = 'translateY(30px)'; 
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
